@@ -17,7 +17,8 @@ class LoginActivity extends Component {
  }
  login = (email, pass) => {
     //alert('email: ' + email + ' password: ' + pass)
-      axios.post('http://localhost:4000/user/login',{
+      //axios.post('http://localhost:4000/user/login',{
+      axios.post('http://192.168.0.21:4000/user/login',{
          email: email,
          password: pass
          },
@@ -27,7 +28,8 @@ class LoginActivity extends Component {
             }
          })
          .then(res => {
-            var {navigate} = this.props.navigation;
+            const {navigate} = this.props.navigation;
+
             console.log("Server Data : "+res.data);
             console.log("token Data : "+res.data.token);
             if(res.data.token==""){
@@ -39,12 +41,21 @@ class LoginActivity extends Component {
             }
             else{
             //this.setState({ token: res.token });
-            navigate('Home', { name: 'KG' })
+            let tok = res.data.token;
+            navigate('Home', { email: email,token:tok })
             }
 
          }, (error) => {
            console.log(error);
          });
+ }
+ nfcButton = ()=>{
+   const {navigate} = this.props.navigation;
+   navigate('NFC', {  })
+ }
+ nfcWriteButton = ()=>{
+   const {navigate} = this.props.navigation;
+   navigate('NFC2', {  })
  }
 
 
@@ -71,6 +82,20 @@ class LoginActivity extends Component {
                 () => this.login(this.state.email, this.state.password)
              }>
              <Text style = {styles.submitButtonText}> Submit </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+             style = {styles.submitButton}
+             onPress = {
+                () => this.nfcButton()
+             }>
+             <Text style = {styles.submitButtonText}> NFC Read</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+             style = {styles.submitButton}
+             onPress = {
+                () => this.nfcWriteButton()
+             }>
+             <Text style = {styles.submitButtonText}> NFC Write</Text>
           </TouchableOpacity>
        </View>
     )

@@ -3,15 +3,20 @@ import { Button, View, Text,StyleSheet } from 'react-native';
 
 export default class SecondActivity extends Component
 {
-     static navigationOptions =
-     {
-        title: 'SecondActivity',
-     };
+   // static navigationOption = ({ navigation }) => {
+   //    return {
+   //      title: navigation.getParam('name', null)
+   //    }
+   //  }
      render()
      {
+      const {state} = this.props.navigation;
+      const email =  state.params.email
+      //const token =  this.props.navigation.getParam('token', 'token not found')
+      const token =  "tt";
         return(
            <View style = { styles.MainContainer }>
-              <Text style = { styles.TextStyle }> Congratulation, You are logged In. </Text>
+              <Text style = { styles.TextStyle }> Congratulation, You are logged In. {email} {token} </Text>
            </View>
         );
      }
