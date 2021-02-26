@@ -11,13 +11,9 @@ const App = () => {
    return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginActivity}
-          
-        />
+      <Stack.Screen name="NFC" component={NFCActivity} />
+        <Stack.Screen name="Login" component={LoginActivity} />
         <Stack.Screen name="Home" component={SecondActivity} />
-        <Stack.Screen name="NFC" component={NFCActivity} />
         <Stack.Screen name="NFC2" component={NFCActivity2} />
 
       </Stack.Navigator>

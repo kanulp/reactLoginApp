@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import axios from 'axios'
@@ -15,40 +14,41 @@ class LoginActivity extends Component {
  handlePassword = (text) => {
     this.setState({ password: text })
  }
- login = (email, pass) => {
-    //alert('email: ' + email + ' password: ' + pass)
-      //axios.post('http://localhost:4000/user/login',{
-      axios.post('http://192.168.0.21:4000/user/login',{
-         email: email,
-         password: pass
-         },
-         {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-         })
-         .then(res => {
-            const {navigate} = this.props.navigation;
+//  login = (email, pass) => {
+//     //alert('email: ' + email + ' password: ' + pass)
+//       //axios.post('http://localhost:4000/user/login',{
+//       axios.post('http://192.168.0.21:4000/user/login',{
+//          email: email,
+//          password: pass
+//          },
+//          {
+//             headers: {
+//                 //'Content-Type': 'application/json'
+//                 'Content-Type': 'multipart/form-data'
+//             }
+//          })
+//          .then(res => {
+//             const {navigate} = this.props.navigation;
 
-            console.log("Server Data : "+res.data);
-            console.log("token Data : "+res.data.token);
-            if(res.data.token==""){
-               alert('Wrong Credentials, please try again');
+//             console.log("Server Data : "+res.data);
+//             console.log("token Data : "+res.data.token);
+//             if(res.data.token==""){
+//                alert('Wrong Credentials, please try again');
 
-            }
-            else if(res.data.message!=null){
-               alert(res.data.message);
-            }
-            else{
-            //this.setState({ token: res.token });
-            let tok = res.data.token;
-            navigate('Home', { email: email,token:tok })
-            }
+//             }
+//             else if(res.data.message!=null){
+//                alert(res.data.message);
+//             }
+//             else{
+//             //this.setState({ token: res.token });
+//             let tok = res.data.token;
+//             navigate('Home', { email: email,token:tok })
+//             }
 
-         }, (error) => {
-           console.log(error);
-         });
- }
+//          }, (error) => {
+//            console.log(error);
+//          });
+//  }
  nfcButton = ()=>{
    const {navigate} = this.props.navigation;
    navigate('NFC', {  })
@@ -78,9 +78,10 @@ class LoginActivity extends Component {
           
           <TouchableOpacity
              style = {styles.submitButton}
-             onPress = {
-                () => this.login(this.state.email, this.state.password)
-             }>
+             //onPress = {
+                //() => this.login(this.state.email, this.state.password)
+             //}
+             >
              <Text style = {styles.submitButtonText}> Submit </Text>
           </TouchableOpacity>
           <TouchableOpacity
